@@ -6,6 +6,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import "./tailwind.css";
+import { SnackbarProvider } from "notistack";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -16,10 +17,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
+
+      <body className="bg-gray-100">
         <ScrollRestoration />
         <Scripts />
+        <SnackbarProvider autoHideDuration={3000}> {children}</SnackbarProvider>
       </body>
     </html>
   );
