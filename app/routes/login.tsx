@@ -39,7 +39,6 @@ export async function action({ request }: ActionFunctionArgs) {
     if (error instanceof Response) {
       return error;
     }
-
     // 認証に失敗した場合、エラーメッセージを含むJSONレスポンスを返す
     const errorMessage =
       error instanceof Error ? error.message : "Authentication failed.";

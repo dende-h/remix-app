@@ -107,7 +107,6 @@ export default function Signup() {
             placeholder="confirm password"
             formType="password"
           />
-
           <div className="flex flex-col gap-4 items-center my-6">
             <PrimaryButton
               buttonText="Signup"
