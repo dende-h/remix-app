@@ -8,7 +8,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
+export default function Home() {
   return (
     <div className="font-sans min-h-screen flex items-center justify-center">
       <div className="card bg-base-100 w-[365px] shadow-xl p-2 ">
