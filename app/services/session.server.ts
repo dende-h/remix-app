@@ -9,7 +9,7 @@ const sessionStorage = createCookieSessionStorage({
     secrets: ["s3cret"], // 環境変数を使うことを推奨
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7, // 1 week
+    maxAge: 60 * 60 * 24 * 3, // 3 days
   },
 });
 

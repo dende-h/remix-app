@@ -38,3 +38,14 @@ export const loginFieldSchema = z.object({
       message: "Password must contain only alphanumeric characters",
     }),
 });
+
+//本の情報入力フォームのバリデーションスキーマ
+export const inputBookInfo = z.object({
+  bookTitle: z.string(),
+  author: z.string(),
+  publisher: z.string(),
+  finishedDate: z.string(),
+  review: z.string(),
+  readingStatus: z.string(),
+  genre: z.string(),
+});

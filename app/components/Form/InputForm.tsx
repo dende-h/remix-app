@@ -11,10 +11,11 @@ type InputFormProps = {
 export const InputForm: FC<InputFormProps> = ({
   placeholder,
   iconElement,
+  formType,
   name,
-  formType = "text",
 }) => {
   const { error, getInputProps } = useField(name);
+
   return (
     <>
       <label

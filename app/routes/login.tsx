@@ -3,7 +3,12 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { json, useActionData } from "@remix-run/react";
+import {
+  json,
+  useActionData,
+  useNavigate,
+  useSearchParams,
+} from "@remix-run/react";
 import { withZod } from "@rvf/zod";
 import { loginFieldSchema } from "constants/zodVlidationSchema";
 import { enqueueSnackbar } from "notistack";
@@ -55,13 +60,21 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Login() {
   const data = useActionData<{ message: string }>();
-  console.log(data);
+  const [params] = useSearchParams();
+  const redirectMessage = params.get("message");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (data && data.message) {
+    if (data?.message) {
       enqueueSnackbar(data.message, { variant: "error" });
     }
-  }, [data]);
+  }, [data, navigate]);
+  useEffect(() => {
+    if (redirectMessage) {
+      enqueueSnackbar(redirectMessage, { variant: "error" });
+      navigate("/login", { replace: true });
+    }
+  }, [navigate, redirectMessage]);
   return (
     <div className="font-sans min-h-screen flex items-center justify-center">
       <div className="card bg-base-100 w-[365px] shadow-xl p-6 ">

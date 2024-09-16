@@ -1,3 +1,4 @@
+import { json, LoaderFunctionArgs, redirect } from "@remix-run/node";
 import {
   Links,
   Meta,
@@ -5,8 +6,25 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import "./tailwind.css";
+import { requireUserSession } from "libs/auth";
 import { SnackbarProvider } from "notistack";
+import "./tailwind.css";
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  try {
+    // 認証チェックを実行、loginやsigninページは除外される
+    const user = await requireUserSession(request);
+    if (user) {
+      return user;
+    }
+
+    // 認証が不要なページの場合、nullユーザーを返す
+    return null;
+  } catch (error) {
+    console.log(error);
+    return redirect("/login?message=You need to log in again.");
+  }
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
